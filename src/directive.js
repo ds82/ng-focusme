@@ -15,11 +15,13 @@ function focusMe($focus, $timeout) {
 
   function link(scope, element, attrs) {
     var id = attrs.focusmeId || attrs.id || attrs.name;
-    $focus.register(id, element);
+    var deregister = $focus.register(id, element);
 
     $timeout(function() {
       scope.$watch('focusme', onFocus);
     });
+
+    scope.$on('destroy', deregister);
 
     function onFocus(shouldFocus) {
 

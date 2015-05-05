@@ -9,6 +9,7 @@ function FocusMe($timeout) {
   var map = {};
 
   pub.register = register;
+  pub.deregister = deregister;
   pub.focus = focus;
 
   function register(key, element) {
@@ -16,6 +17,11 @@ function FocusMe($timeout) {
     if (key && element) {
       map[key] = element;
     }
+    return function() { deregister(key); };
+  }
+
+  function deregister(key) {
+    map[key] = undefined;
   }
 
   function focus(key) {

@@ -16,11 +16,13 @@ function focusMe($focus, $timeout) {
 
   function link(scope, element, attrs) {
     var id = attrs.focusmeId || attrs.id || attrs.name;
-    $focus.register(id, element);
+    var deregister = $focus.register(id, element);
 
     $timeout(function() {
       scope.$watch('focusme', onFocus);
     });
+
+    scope.$on('destroy', deregister);
 
     function onFocus(shouldFocus) {
 
@@ -47,11 +49,13 @@ _dereq_('./directive');
 angular.module('io.dennis.focusme')
   .service('FocusMe', FocusMe);
 
-function FocusMe() {
+FocusMe.$inject = ['$timeout'];
+function FocusMe($timeout) {
   var pub = this;
   var map = {};
 
   pub.register = register;
+  pub.deregister = deregister;
   pub.focus = focus;
 
   function register(key, element) {
@@ -59,14 +63,27 @@ function FocusMe() {
     if (key && element) {
       map[key] = element;
     }
+    return function() { deregister(key); };
+  }
+
+  function deregister(key) {
+    map[key] = undefined;
   }
 
   function focus(key) {
 
-    if (map[key]) {
-      map[key][0].focus();
+    var element = map[key];
+    if (angular.isDefined(element)) {
+      $timeout(focusElement);
+    }
+
+    function focusElement() {
+      element = (angular.isElement(element)) ?
+        element : element[0];
+      element.focus();
     }
   }
+
 }
 
 },{}]},{},[2])(2)
