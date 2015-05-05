@@ -2,7 +2,7 @@
   "name": "ng-focusme",
   "version": "0.0.1",
   "description": "A directive that helps you to focus elements",
-  "main": "src/index.js",
+  "main": "dist/focusme.js",
   "scripts": {
     "prepublish": "npm run build",
     "test": "karma start karma.conf.js --single-run",
