@@ -1,0 +1,18 @@
+{
+  "name": "ng-focusme",
+  "version": "0.0.1",
+  "description": "A directive that helps you to focus elements",
+  "main": "src/index.js",
+  "scripts": {
+    "prepublish": "npm run build && npm test",
+    "test": "karma start karma.conf.js --single-run",
+    "build": "npm run browserify",
+    "browserify": "browserify src/index.js --standalone ng-focusme | derequire > dist/focusme.js"
+  },
+  "keywords": [
+    "angular",
+    "focus"
+  ],
+  "author": "Dennis Sänger <npm15.ng-focusme@mail.ds82.de>",
+  "license": "MIT"
+}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>ng-focusme angular v1.2x example</title>
+
+    <!-- jquery -->
+    <!-- angular -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.27/angular.js"></script>
+
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- ng-focusme -->
+    <script src="../dist/focusme.js"></script>
+
+    <script>
+      angular.module('app', [
+        'io.dennis.focusme'
+      ]).controller('MainCtrl', Main);
+
+      Main.$inject = ['FocusMe']
+      function Main($focus) {
+        var vm = this;
+
+        vm.makeActive = makeActive;
+
+        function makeActive(what) {
+          $focus.focus(what);
+        }
+      }
+    </script>
+  </head>
+
+  <body ng-controller="MainCtrl as main">
+    <div class="container">
+
+      <div class="page-header">
+        <h1>ng-focusme angular v1.2x example</h1>
+
+        <p class="lead">
+        </p>
+      </div>
+
+      <form class="form-horizontal">
+        <div class="form-group">
+          <label for="inputEmail3" class="col-sm-2 control-label">Email</label>
+          <div class="col-sm-10">
+            <input type="email" class="form-control" id="inputEmail3" placeholder="Email" focusme="true">
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-sm-2 control-label">Password</label>
+          <div class="col-sm-10">
+            <input type="password" class="form-control" id="inputPassword3" placeholder="Password" focusme>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <div class="checkbox">
+              <label>
+                <input type="checkbox"> Remember me
+              </label>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Sign in</button>
+          </div>
+        </div>
+      </form>
+
+      <div class="alert alert-info">
+        <button class="btn btn-default" ng-click="main.makeActive('inputEmail3')">focus email field</button>
+        <button class="btn btn-default" ng-click="main.makeActive('inputPassword3')">focus password field</button>
+      </div>
+
+    </div> <!-- /container -->
+
+  </body>
+</html>
+
