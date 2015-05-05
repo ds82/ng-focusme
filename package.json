@@ -4,7 +4,7 @@
   "description": "A directive that helps you to focus elements",
   "main": "src/index.js",
   "scripts": {
-    "prepublish": "npm run build && npm test",
+    "prepublish": "npm run build",
     "test": "karma start karma.conf.js --single-run",
     "build": "npm run browserify",
     "browserify": "browserify src/index.js --standalone ng-focusme | derequire > dist/focusme.js"
