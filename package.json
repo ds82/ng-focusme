@@ -1,6 +1,6 @@
 {
   "name": "ng-focusme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A directive that helps you to focus elements",
   "main": "dist/focusme.js",
   "scripts": {
